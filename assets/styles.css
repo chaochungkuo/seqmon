@@ -1,0 +1,38 @@
+/* assets/styles.css */
+
+/* Import the Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Apply the font to the body text */
+body {
+    font-family: 'Roboto', "sans-serif";
+    font-size: 16px; /* Optional: set a default font size */
+    color: #333; /* Optional: set a default font color */
+}
+
+/* Apply the font to all heading tags */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', "sans-serif";
+    font-weight: 500; /* Optional: set a default weight for headings */
+    color: #111; /* Optional: set a default color for headings */
+}
+
+/* Optional: You can adjust the font size for each heading level if desired */
+h1 {
+    font-size: 2.5em;
+}
+h2 {
+    font-size: 2em;
+}
+h3 {
+    font-size: 1.75em;
+}
+h4 {
+    font-size: 1.5em;
+}
+h5 {
+    font-size: 1.25em;
+}
+h6 {
+    font-size: 1em;
+}

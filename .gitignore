@@ -1,0 +1,4 @@
+data/bcl_stats.csv
+data/multiqc_lanes.csv
+data/multiqc_samples.csv
+data/multiqc_summary.csv

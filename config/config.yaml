@@ -1,0 +1,17 @@
+bcl_paths:
+  - /data/raw/miseq1_M00818
+  - /data/raw/miseq2_M04404
+  - /data/raw/nextseq_NB501289
+  - /data/raw/novaseq_A01742
+
+multiqc_paths:
+  - /data/fastq/
+
+logo:
+  - assets/GF_Logo.png
+
+sequencers:
+  - miseq1_M00818
+  - miseq2_M04404
+  - nextseq_NB501289
+  - novaseq_A01742
