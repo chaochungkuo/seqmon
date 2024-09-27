@@ -4,9 +4,6 @@ import pandas as pd
 import yaml
 import os
 
-with open('config/config.yaml', 'r') as file:
-    config = yaml.safe_load(file)
-
 
 def update_multiqc(config):
     """Update all multiqc data"""
@@ -26,7 +23,11 @@ def update_multiqc(config):
                 # print(run_name)
                 if run_name not in cached_runs:
                     seq_id = run_name.split("_")[1]
-                    sequencer = [x for x in sequencers if seq_id in x][0]
+                    try:
+                        sequencer = [x for x in sequencers if seq_id in x][0]
+                    except:
+                        print("Error in loading "+os.path.join(mq_path, run_name))
+                        continue
                     outputs = check_multiqc_in_a_run(sequencer, mq_path, run_name)
                     if outputs is not None:
                         all_summary.append(outputs[0])
@@ -66,14 +67,14 @@ def update_multiqc(config):
 def check_multiqc_in_a_run(sequencer, mq_path, run_name):
     try:
         full_path = os.path.join(mq_path, run_name)
-        print("loading "+full_path)
         summarydf, by_lane, by_samples = parse_multiqc_statistics(full_path)
         summarydf["sequencer"] = sequencer
         by_lane["sequencer"] = sequencer
         by_samples["sequencer"] = sequencer
+        # print("loading "+full_path)
         return [summarydf, by_lane, by_samples]
     except:
-        print("Error for "+ full_path)
+        print("Error in loading MultiQC Data for "+ full_path)
         return None
 
 
@@ -115,13 +116,20 @@ def update_bclstats(config):
 def check_bcl_in_a_run(sequencer, bcl_path, run_name):
     try:
         full_path = os.path.join(bcl_path, run_name)
-        print("loading "+full_path)
+        # print("loading "+full_path)
         bcl_stats = parse_bcl_statistics(full_path)
         bcl_stats["sequencer"] = sequencer
         return bcl_stats
     except:
-        print("Error for "+ full_path)
+        print("Error in loading BCL for "+ full_path)
 
-if __name__ == '__main__':
+def update_tables():
+    with open('config/config.yaml', 'r') as file:
+        config = yaml.safe_load(file)
     df = update_multiqc(config)
+    df = update_bclstats(config)
+    
+    
+if __name__ == '__main__':
+    df = update_multiqc()
     print(df)
