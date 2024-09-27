@@ -1,5 +1,6 @@
 from dash.dependencies import Input, Output
 from summary import summary_total, summary_undetermined
+from viz_each_run import sample_reads, lane_reads, unkonwn_barcodes
 import pandas as pd
 from table_integration import update_tables
 from datetime import datetime
@@ -61,3 +62,80 @@ def register_callbacks(app):
             update_tables()
         return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+    @app.callback(
+        Output('sample-reads', 'figure'),
+        Input('runs-table', 'selected_rows'),
+        Input('runs-table', 'data')
+    )
+    def update_sample_reads(selected_rows, table_data):
+        if selected_rows:
+            # Get the index of the selected row
+            selected_row_idx = selected_rows[0]
+            # Get the data of the selected row
+            selected_row = table_data[selected_row_idx]
+            sel_run_name = selected_row["run_name"]
+            
+            df_samples = pd.read_csv('data/multiqc_samples.csv')
+            df_samples = df_samples.loc[df_samples["run_name"]==sel_run_name]
+            
+            if df_samples.shape[0] > 0:
+                fig = sample_reads(df_samples)
+            else:
+                fig = {}
+        else:
+            # Return an empty figure if no row is selected
+            fig = {}
+
+        return fig
+
+    @app.callback(
+        Output('lane-reads', 'figure'),
+        Input('runs-table', 'selected_rows'),
+        Input('runs-table', 'data')
+    )
+    def update_lane_reads(selected_rows, table_data):
+        if selected_rows:
+            # Get the index of the selected row
+            selected_row_idx = selected_rows[0]
+            # Get the data of the selected row
+            selected_row = table_data[selected_row_idx]
+            sel_run_name = selected_row["run_name"]
+            
+            df_samples = pd.read_csv('data/multiqc_lanes.csv')
+            df_samples = df_samples.loc[df_samples["run_name"]==sel_run_name]
+            
+            if df_samples.shape[0] > 0:
+                fig = lane_reads(df_samples)
+            else:
+                fig = {}
+        else:
+            # Return an empty figure if no row is selected
+            fig = {}
+
+        return fig
+    
+    @app.callback(
+        Output('unknown_barcodes', 'figure'),
+        Input('runs-table', 'selected_rows'),
+        Input('runs-table', 'data')
+    )
+    def update_unknown_barcodes(selected_rows, table_data):
+        if selected_rows:
+            # Get the index of the selected row
+            selected_row_idx = selected_rows[0]
+            # Get the data of the selected row
+            selected_row = table_data[selected_row_idx]
+            sel_run_name = selected_row["run_name"]
+            
+            df_samples = pd.read_csv('data/multiqc_lanes.csv')
+            df_samples = df_samples.loc[df_samples["run_name"]==sel_run_name]
+            print(df_samples)
+            if df_samples.shape[0] > 0:
+                fig = unkonwn_barcodes(df_samples)
+            else:
+                fig = {}
+        else:
+            # Return an empty figure if no row is selected
+            fig = {}
+
+        return fig

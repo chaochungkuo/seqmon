@@ -66,7 +66,7 @@ def parse_multiqc_statistics(run_path):
         summarydf = pd.DataFrame({"run_name": [run_name],
                                   "total": [summary.iloc[0]],
                                   "undetermined": [summary.iloc[1]],
-                                  "undetermined_pct": [summary.iloc[1]/summary.iloc[0]]})
+                                  "undetermined_pct": [summary.iloc[1]/(summary.iloc[0] + summary.iloc[1])]})
         return summarydf, by_lane, by_samples
     
     except Exception as e:

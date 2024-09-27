@@ -3,9 +3,16 @@ bcl_paths:
   - /data/raw/miseq2_M04404
   - /data/raw/nextseq_NB501289
   - /data/raw/novaseq_A01742
+  - /mnt/nextgen2/archive/raw/miseq1_M00818
+  - /mnt/nextgen2/archive/raw/miseq2_M04404
+  - /mnt/nextgen2/archive/raw/nextseq_NB501289
+  - /mnt/nextgen2/archive/raw/novaseq_A01742
 
 multiqc_paths:
   - /data/fastq/
+  - /mnt/nextgen2/archive/fastq/
+  - /mnt/nextgen2/data/fastq/
+  - /mnt/nextgen3/data/fastq/
 
 logo:
   - assets/GF_Logo.png

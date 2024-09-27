@@ -44,7 +44,6 @@ def create_layout(config, app_title):
             html.Button('Reload Data', id='reload-button'),
             html.Div("Last reload:"),
             html.Div(id='last-reload', children="-"),
-            html.Button('Reset App', id='reset-button')
         ], style={'width': '20%', 'display': 'inline-block', 'vertical-align': 'top', 'padding': '10px', 'background-color': '#f4f4f4'}),
         
         
@@ -52,13 +51,19 @@ def create_layout(config, app_title):
         html.Div([
             # Summary figures
             html.Div([
-                dcc.Graph(figure={}, id='summary-total'),
-                dcc.Graph(figure={}, id='summary-undetermined')
+                dbc.Row([
+                    dbc.Col(dcc.Graph(figure={}, id='summary-total')),
+                    dbc.Col(dcc.Graph(figure={}, id='summary-undetermined'))
+                ])
             ]),
             # Table of runs
             table_summary(),
             # Detailed figures for the selected run
-            dcc.Graph(id='detailed-figures')
+            dbc.Row([
+                dbc.Col(dcc.Graph(id='sample-reads')),
+                dbc.Col(dcc.Graph(id='lane-reads')),
+            ]),
+            dcc.Graph(id='unknown_barcodes'),
         ], style={'width': '75%', 'display': 'inline-block', 'padding': '20px'})
     ])
 

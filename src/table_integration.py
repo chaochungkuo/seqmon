@@ -20,7 +20,8 @@ def update_multiqc(config):
         for mq_path in multiqc_paths:
             runs = os.listdir(mq_path)
             for run_name in runs:
-                # print(run_name)
+                print(os.path.join(mq_path, run_name))
+                # print(".", end="")
                 if run_name not in cached_runs:
                     seq_id = run_name.split("_")[1]
                     try:
@@ -91,9 +92,12 @@ def update_bclstats(config):
             sequencer = bcl_path.strip("/").split("/")[-1]
             runs = os.listdir(bcl_path)
             for run_name in runs:
-                # print(run_name)
+                
+                # print(".", end="")
                 if run_name not in cached_runs:
+                    print(os.path.join(bcl_path, run_name))
                     bcl_stats = check_bcl_in_a_run(sequencer, bcl_path, run_name)
+                    print(".", end="")
                     if bcl_stats is not None:
                         all_bcl_stats.append(bcl_stats)
         if len(all_bcl_stats) > 0:
@@ -131,5 +135,5 @@ def update_tables():
     
     
 if __name__ == '__main__':
-    df = update_multiqc()
-    print(df)
+    update_tables()
+    # print(df)

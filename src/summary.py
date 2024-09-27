@@ -24,6 +24,13 @@ def summary_total(df):
         yaxis_title='Total',
         margin=dict(l=40, r=40, t=40, b=40),
         legend_title_text='Sequencer',
+        legend=dict(
+            orientation="v",  # Horizontal legend
+            yanchor="top",
+            y=-0.2,  # Position below the plot
+            xanchor="center",
+            x=0.5  # Centered horizontally
+        )
     )
 
     return fig
@@ -51,6 +58,13 @@ def summary_undetermined(df):
         yaxis_title='Undetermined (%)',
         margin=dict(l=40, r=40, t=40, b=40),
         legend_title_text='Sequencer',
+        legend=dict(
+            orientation="v",  # Horizontal legend
+            yanchor="top",
+            y=-0.2,  # Position below the plot
+            xanchor="center",
+            x=0.5  # Centered horizontally
+        )
     )
 
     return fig
