@@ -10,7 +10,7 @@ def sample_reads(df):
     fig = px.bar(df, orientation='h',
                  y="Sample", x='total',
                  labels={'Sample': 'Sample', 'total': 'Total Reads'},
-                 title=f"Reads per Sample of {df['run_name'].iloc[0]}",
+                 title=f"{df['run_name'].iloc[0]}",
                  color='color',  # Use the color column to define the bar colors
                  color_discrete_map={'red': '#EF553B', 'blue': '#636EFA'}  # Map the color values to actual colors
                  )
@@ -28,7 +28,7 @@ def lane_reads(df):
     fig = px.bar(df, orientation='h',
                 y="lane", x='total',
                 labels={'lane': 'Lane', 'total': 'Total Reads'},
-                title=f"Reads per Lane of {df['run_name'].iloc[0]}"
+                title=f"{df['run_name'].iloc[0]}"
             )
     # Update the layout of the plot
     fig.update_layout(

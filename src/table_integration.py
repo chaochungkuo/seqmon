@@ -20,7 +20,7 @@ def update_multiqc(config):
         for mq_path in multiqc_paths:
             runs = os.listdir(mq_path)
             for run_name in runs:
-                print(os.path.join(mq_path, run_name))
+                # print(os.path.join(mq_path, run_name))
                 # print(".", end="")
                 if run_name not in cached_runs:
                     seq_id = run_name.split("_")[1]

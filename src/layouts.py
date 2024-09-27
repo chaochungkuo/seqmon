@@ -108,12 +108,11 @@ def table_summary():
                 row_selectable='single',
                 selected_rows=[],
                 style_table={'height': '500px', 'overflowY': 'auto'},
-                style_cell={'textAlign': 'right', 'padding': '10px',
-                            'minWidth': '100px', 'width': '150px',
-                            'maxWidth': '200px',
+                style_cell={'textAlign': 'right',
+                            'padding': '10px',
                             'whiteSpace': 'normal', 
                             'overflow': 'hidden',
-                            'textOverflow': 'ellipsis',},
+                            'textOverflow': 'clip',},
                 style_header={'backgroundColor': '#e1e1e1', 'fontWeight': 'bold'},
                 fixed_rows={'headers': True},
                 style_data_conditional=[
@@ -128,6 +127,14 @@ def table_summary():
                     {
                         'if': {'column_id': 'sequencer_x'},
                         'textAlign': 'left',  # Align 'sequencer' column to the left
+                    },
+                    {
+                        'if': {'column_id': 'selected_row'},
+                        'width': '150px',  # Adjust the width of the selection column
+                        'textAlign': 'center',  # Center-align the tick boxes
+                        'overflow': 'hidden',  # Prevent overflow
+                        'textOverflow': 'clip',  # Prevent the overflow dots
+                        'padding': '0px 0px',  # Adjust padding to make the tick box fit better
                     }
                 ],
                 sort_action='native',  # Enables sortable headers
