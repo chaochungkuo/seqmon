@@ -12,7 +12,7 @@ Seqmon parses through all the paths defined in `config.yaml` and collects the fo
 
 These statistics are saved under the `./data/` directory and can be updated when new data becomes available. Existing entries won’t be reloaded unless you manually remove the associated files.
 
-![Screenshot of Seqmon](./assets/screenshot.png.png "Screenshot of Seqmon")
+![Screenshot of Seqmon](https://github.com/chaochungkuo/seqmon/blob/main/assets/screenshot.png "Screenshot of Seqmon")
 
 ## Configuration
 
