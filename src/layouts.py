@@ -14,7 +14,7 @@ def create_layout(config, app_title):
         # Side panel
         html.Div([
             html.H1("Seqmon"),
-            html.Div("A Light Sequencing Monitor"),
+            html.Div("A Lightweight Sequencing Monitor"),
             html.Br(),
             html.Div("This web app is used to monitor the sequencing runs from multiple sequencers for their efficiency and quality."),
             html.Hr(),
