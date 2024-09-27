@@ -129,7 +129,7 @@ def register_callbacks(app):
             
             df_samples = pd.read_csv('data/multiqc_lanes.csv')
             df_samples = df_samples.loc[df_samples["run_name"]==sel_run_name]
-            print(df_samples)
+
             if df_samples.shape[0] > 0:
                 fig = unkonwn_barcodes(df_samples)
             else:

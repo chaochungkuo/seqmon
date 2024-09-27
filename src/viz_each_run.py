@@ -47,7 +47,7 @@ def unkonwn_barcodes(df):
                 counts[b] += c
     dff = pd.DataFrame(list(counts.items()), columns=['barcodes', 'reads'])
     dff = dff.sort_values(by='reads', ascending=True).head(10)
-    print(dff)
+
     fig = px.bar(dff, orientation='h',
                 y="barcodes", x='reads',
                 labels={'barcodes': 'Unkown Barcodes', 'reads': 'Total Reads'},

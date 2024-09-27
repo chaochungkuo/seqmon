@@ -78,15 +78,7 @@ def create_banner(app_title):
                                     ).read()
                                 ).decode()
                             ), height=30
-                        )),
-                    dbc.Col(html.Img(
-                            src='data:image/png;base64,{}'.format(
-                                base64.b64encode(
-                                    open('./assets/GF_Logo.png', 'rb'
-                                    ).read()
-                                ).decode()
-                            ), height=30
-                        )),
+                        ), width=10),
                     dbc.Col(html.A(
                         id='gh-link',
                         children=[
@@ -95,7 +87,7 @@ def create_banner(app_title):
                         href="https://github.com/chaochungkuo/seqmon",
                         style={'color': 'black'}
                     ))
-                ])
+                ], justify="start")
         ],
         style ={'padding':'0.5em'},
         )
