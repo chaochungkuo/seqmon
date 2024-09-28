@@ -18,14 +18,14 @@ def create_layout(config, app_title):
             html.Br(),
             html.Div("This web app is used to monitor the sequencing runs from multiple sequencers for their efficiency and quality."),
             html.Hr(),
-            html.Div("Define the starting dates"),
+            html.Div("Define the starting date"),
             dcc.DatePickerSingle(
                 id='start-date-picker',
                 date=(datetime.now() - timedelta(days=90)).strftime('%Y-%m-%d'),
                 display_format='YYYY-MM-DD',
                 style={'margin-bottom': '10px'}
             ),
-            html.Div("Define the ending dates"),
+            html.Div("Define the ending date"),
             dcc.DatePickerSingle(
                 id='end-date-picker',
                 date=datetime.now().strftime('%Y-%m-%d'),

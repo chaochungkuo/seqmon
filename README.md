@@ -65,9 +65,6 @@ These statistics are saved under the `./data/` directory and can be updated when
    multiqc_paths:
      - /data/fastq/
 
-   logo:
-     - ./assets/your_logo.png
-
    sequencers:
      - miseq1_M00818
      - miseq2_M04404
@@ -75,7 +72,7 @@ These statistics are saved under the `./data/` directory and can be updated when
      - novaseq_A01742
    ```
 
-   Ensure the logo path and sequencer names in the configuration match your setup.
+   Ensure the sequencer names in the configuration match your setup.
 
 ## Deployment
 
