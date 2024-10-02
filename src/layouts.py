@@ -51,21 +51,25 @@ def create_layout(config, app_title):
         html.Div([
             # Summary figures
             html.Div([
-                dbc.Row([
-                    dbc.Col(dcc.Graph(figure={}, id='summary-total')),
-                    dbc.Col(dcc.Graph(figure={}, id='summary-undetermined'))
+                dbc.Tabs([
+                    dbc.Tab(dcc.Graph(figure={}, id='summary-total'), label="Total Summary"),
+                    dbc.Tab(dcc.Graph(figure={}, id='summary-undetermined'), label="Undetermined Summary")
                 ])
             ]),
             # Table of runs
             table_summary(),
             # Detailed figures for the selected run
-            dbc.Row([
-                dbc.Col(dcc.Graph(id='sample-reads')),
-                dbc.Col(dcc.Graph(id='lane-reads')),
-            ]),
-            dcc.Graph(id='unknown_barcodes'),
+            html.Div([
+                dbc.Row([
+                    dbc.Col(dcc.Graph(id='sample-reads'), width=6),
+                    dbc.Col(dcc.Graph(id='lane-reads'), width=6),
+                ]),
+                dbc.Row([
+                    dbc.Col(dcc.Graph(id='unknown_barcodes'), width=6),
+                ])
+            ])
         ], style={'width': '75%', 'display': 'inline-block', 'padding': '20px'})
-    ])
+    ], fluid=True)
 
 def create_banner(app_title):
     return html.Div(

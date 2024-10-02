@@ -26,10 +26,6 @@ def summary_total(df):
         legend_title_text='Sequencer',
         legend=dict(
             orientation="v",  # Horizontal legend
-            yanchor="top",
-            y=-0.2,  # Position below the plot
-            xanchor="center",
-            x=0.5  # Centered horizontally
         )
     )
 
@@ -60,10 +56,6 @@ def summary_undetermined(df):
         legend_title_text='Sequencer',
         legend=dict(
             orientation="v",  # Horizontal legend
-            yanchor="top",
-            y=-0.2,  # Position below the plot
-            xanchor="center",
-            x=0.5  # Centered horizontally
         )
     )
 

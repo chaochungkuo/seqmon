@@ -4,7 +4,55 @@ from viz_each_run import sample_reads, lane_reads, unkonwn_barcodes
 import pandas as pd
 from table_integration import update_tables
 from datetime import datetime
+import plotly.graph_objects as go
 
+
+# Function to create a figure when no MultiQC data is available
+def no_multiqc_data_figure():
+    fig = go.Figure()
+    fig.add_annotation(
+        text="No MultiQC data is available",
+        xref="paper", yref="paper",
+        x=0.5, y=0.5, showarrow=False,
+        font=dict(size=20)
+    )
+    fig.update_layout(
+        xaxis=dict(showgrid=False, zeroline=False, visible=False),
+        yaxis=dict(showgrid=False, zeroline=False, visible=False),
+        plot_bgcolor="white",
+        margin=dict(l=40, r=40, t=40, b=40)
+    )
+    return fig
+
+# Function to create a figure when no run is selected
+def no_selected_run_figure():
+    fig = go.Figure()
+    fig.add_annotation(
+        text="Please select a sequencing run",
+        xref="paper", yref="paper",
+        x=0.5, y=0.5, showarrow=False,
+        font=dict(size=20)
+    )
+    fig.update_layout(
+        xaxis=dict(showgrid=False, zeroline=False, visible=False),
+        yaxis=dict(showgrid=False, zeroline=False, visible=False),
+        plot_bgcolor="white",
+        margin=dict(l=40, r=40, t=40, b=40)
+    )
+    return fig
+
+def process_selected_df(selected_rows, table_data):
+    # Get the index of the selected row
+    selected_row_idx = selected_rows[0]
+    # Get the data of the selected row
+    selected_row = table_data[selected_row_idx]
+    sel_run_name = selected_row["run_name"]
+    
+    # Load your sample data
+    df_samples = pd.read_csv('data/multiqc_samples.csv')
+    df_samples = df_samples.loc[df_samples["run_name"] == sel_run_name]
+    return df_samples
+            
 def filter_tables(start_date, end_date, select_sequencers):
     # Load your dataframes (bcl_stats, multiqc_lanes, etc.)
     bcl_stats = pd.read_csv("data/bcl_stats.csv")
@@ -69,23 +117,17 @@ def register_callbacks(app):
     )
     def update_sample_reads(selected_rows, table_data):
         if selected_rows:
-            # Get the index of the selected row
-            selected_row_idx = selected_rows[0]
-            # Get the data of the selected row
-            selected_row = table_data[selected_row_idx]
-            sel_run_name = selected_row["run_name"]
-            
-            df_samples = pd.read_csv('data/multiqc_samples.csv')
-            df_samples = df_samples.loc[df_samples["run_name"]==sel_run_name]
-            
+            df_samples = process_selected_df(selected_rows, table_data)
             if df_samples.shape[0] > 0:
+                # If data exists, generate the figure using sample_reads
                 fig = sample_reads(df_samples)
             else:
-                fig = {}
+                # If no data, return a figure with the "No MultiQC data is available" message
+                fig = no_multiqc_data_figure()
         else:
-            # Return an empty figure if no row is selected
-            fig = {}
-
+            # If no row is selected, return a figure with "Please select a sequencing run" message
+            fig = no_selected_run_figure()
+        
         return fig
 
     @app.callback(
@@ -95,23 +137,16 @@ def register_callbacks(app):
     )
     def update_lane_reads(selected_rows, table_data):
         if selected_rows:
-            # Get the index of the selected row
-            selected_row_idx = selected_rows[0]
-            # Get the data of the selected row
-            selected_row = table_data[selected_row_idx]
-            sel_run_name = selected_row["run_name"]
-            
-            df_samples = pd.read_csv('data/multiqc_lanes.csv')
-            df_samples = df_samples.loc[df_samples["run_name"]==sel_run_name]
-            
+            df_samples = process_selected_df(selected_rows, table_data)
             if df_samples.shape[0] > 0:
                 fig = lane_reads(df_samples)
             else:
-                fig = {}
+                # If no data, return a figure with the "No MultiQC data is available" message
+                fig = no_multiqc_data_figure()
         else:
-            # Return an empty figure if no row is selected
-            fig = {}
-
+            # If no row is selected, return a figure with "Please select a sequencing run" message
+            fig = no_selected_run_figure()
+        
         return fig
     
     @app.callback(
@@ -133,9 +168,10 @@ def register_callbacks(app):
             if df_samples.shape[0] > 0:
                 fig = unkonwn_barcodes(df_samples)
             else:
-                fig = {}
+                # If no data, return a figure with the "No MultiQC data is available" message
+                fig = no_multiqc_data_figure()
         else:
-            # Return an empty figure if no row is selected
-            fig = {}
-
+            # If no row is selected, return a figure with "Please select a sequencing run" message
+            fig = no_selected_run_figure()
+        
         return fig
