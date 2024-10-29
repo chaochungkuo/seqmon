@@ -3,3 +3,5 @@ plotly
 pandas
 pyyaml
 interop
+dash-bootstrap-components
+dash-auth

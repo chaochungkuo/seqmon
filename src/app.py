@@ -3,7 +3,7 @@ from dash import Dash, html
 from layouts import create_layout
 from callbacks import register_callbacks
 import dash_bootstrap_components as dbc
-# import os
+import dash_auth
 
 # Load configuration
 with open('config/config.yaml', 'r') as file:
